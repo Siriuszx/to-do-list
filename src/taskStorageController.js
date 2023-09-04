@@ -5,8 +5,13 @@ class TaskStorageController {
         this.taskLibrary = [];
     }
 
-    addNewTask(title, description, dueDate, priority) {
-        let newTask = new Task(title, description, dueDate, priority);
+    addNewTask(taskObj) {
+        let newTask = new Task(
+            taskObj.title, 
+            taskObj.description, 
+            taskObj.dueDate, 
+            taskObj.priority);
+
         this.taskLibrary.push(newTask);
     }
 

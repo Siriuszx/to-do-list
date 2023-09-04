@@ -7,15 +7,20 @@ class TaskListController {
         this.UI = new UIController();
     }
 
-    addNewTask(title, description, dueDate, priority) {
-        this.storage.addNewTask(title, description, dueDate, priority);
+    addNewTask(taskObj) {
+        this.storage.addNewTask(taskObj.title, 
+            taskObj.description, 
+            taskObj.dueDate, 
+            taskObj.priority);
+        
+        this.UI.addNewTaskEl(taskObj);
     }
 
     logInfo(type) {
         if (type === 'all') {
             let taskLibrary = this.storage.getTaskLibrary();
 
-            this.UI.logTaskArr(taskLibrary);
+            this.UI.logAllTasks(taskLibrary);
         } else if (Number.isInteger(type) && type > 0) {
             this.UI.logTask(this.storage.getTaskObj(type));
         }
