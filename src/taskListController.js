@@ -8,12 +8,8 @@ class TaskListController {
     }
 
     addNewTask(taskObj) {
-        this.storage.addNewTask(taskObj.title, 
-            taskObj.description, 
-            taskObj.dueDate, 
-            taskObj.priority);
-        
-        this.UI.addNewTaskEl(taskObj);
+        this.storage.addNewTask(taskObj);
+        this.UI.updateTaskContainer(this.storage.getTaskLibrary());
     }
 
     logInfo(type) {
