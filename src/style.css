@@ -24,13 +24,33 @@ body {
 }
 
 .todo-main {
+    padding: 1.5em 2em;
     background-color: white;
 }
 
 .todo-container {
-    /* list-style-type: none; */
+    padding: 0;
+    list-style-type: decimal;
 }
 
-.todo-item {
-    
+.todo-item {}
+
+.item-title {
+    margin: 0.3em 0;
+    font-size: 1.2rem;
+}
+
+.item-info {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.info-title {
+    font-weight: 700;
+}
+
+.info-data {
+    text-decoration: underline;
 }
