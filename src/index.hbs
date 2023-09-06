@@ -24,8 +24,35 @@
     </nav>
     <main class="todo-main">
         <ul class="todo-container">
-            
+
         </ul>
+        <div class="controls">
+            <button class="action-btn" id="open-book-modal" type="button">New Task</button>
+        </div>
+        <dialog id="modal-add-task">
+            <form id="new-task-form" method="dialog">
+                <div class="form-input-field">
+                    <label for="form-title">Title: </label>
+                    <input type="text" name="form-title" id="form-title" placeholder="Task Name">
+                </div>
+                <div class="form-input-field">
+                    <label for="form-desc">Description: </label>
+                    <input type="text" name="form-desc" id="form-desc" placeholder="Task Description">
+                </div>
+                <div class="form-input-field">
+                    <label for="form-due-date">Due Date: </label>
+                    <input type="date" name="form-due-date" id="form-due-date" placeholder="Task Due Date">
+                </div>
+                <div class="form-input-field">
+                    <label for="form-priority">Priority: </label>
+                    <input type="number" name="form-priority" id="form-priority" placeholder="Task Priority">
+                </div>
+                <div class="form-input-field modal-controls">
+                    <button class="action-btn" id="submit-task-btn" type="button" type="submit">Add</button>
+                    <button class="action-btn" id="close-book-modal" type="button" type="submit">Close</button>
+                </div>
+            </form>
+        </dialog>
     </main>
 </body>
 

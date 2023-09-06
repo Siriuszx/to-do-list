@@ -13,7 +13,7 @@ body {
 }
 
 .todo-nav {
-    background-color: lightgray;
+    background-color: #d3d3d3;
     padding: 1.5em 2em;
 }
 
@@ -24,12 +24,13 @@ body {
 }
 
 .todo-main {
-    padding: 1.5em 2em;
     background-color: white;
+    display: grid;
+    grid-template-rows: 1fr;
 }
 
 .todo-container {
-    padding: 0;
+    padding: 1.5em 2em;
     list-style-type: decimal;
 }
 
@@ -53,4 +54,55 @@ body {
 
 .info-data {
     text-decoration: underline;
+}
+
+#modal-add-task {
+    border: none;
+    box-shadow: 0 0 1em rgb(0 0 0 / 0.3);
+}
+
+#new-task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.form-input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em;
+}
+
+.modal-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8em;
+}
+
+.action-btn {
+    padding: 0.5em;
+    color: rgb(255 255 255);
+    border: none;
+    background-color: rgb(0 0 0);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.action-btn:hover {
+    color: rgb(0 0 0);
+    background-color: #d3d3d3;
+    cursor: pointer;
+}
+
+.controls {
+    padding: 0.8em 2em;
+    border-top: 2px solid #d3d3d3;
+}
+
+.controls-btn {
+    padding: 0.7em;
+    color: #fff;
+    background-color: #000;
+    border: none;
+    border-radius: 4px;
 }
