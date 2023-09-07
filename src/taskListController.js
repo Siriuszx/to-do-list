@@ -12,7 +12,7 @@ class TaskListController {
         this.UI.updateTaskContainer(this.storage.getTaskLibrary());
     }
 
-    updateAppListeners() {
+    updateListeners() {
         this.UI.updateUIListeners(this.addNewTask.bind(this));
     }
 

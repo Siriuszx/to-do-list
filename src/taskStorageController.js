@@ -6,13 +6,16 @@ class TaskStorageController {
     }
 
     addNewTask(taskObj) {
-        let newTask = new Task(
-            taskObj.title, 
-            taskObj.description, 
-            taskObj.dueDate, 
-            taskObj.priority);
+        if (taskObj) {
+            let newTask = new Task(
+                taskObj.title,
+                taskObj.description,
+                taskObj.dueDate,
+                taskObj.priority
+            );
 
-        this.taskLibrary.push(newTask);
+            this.taskLibrary.push(newTask);
+        }
     }
 
     removeTask(taskIndex) {

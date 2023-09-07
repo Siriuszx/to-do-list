@@ -3,6 +3,7 @@ class UIController {
         this.todoContainer = document.querySelector('.todo-container');
         
         this.taskModal = document.querySelector('#modal-add-task');
+        this.taskForm = document.querySelector('#new-task-form');
         this.submitTaskBtn = document.querySelector('#submit-task-btn');
         this.openTaskModalBtn = document.querySelector('#open-task-modal');
         this.closeTaskModalBtn = document.querySelector('#close-task-modal');
@@ -86,12 +87,14 @@ class UIController {
     }
 
     getFormTask() {
-        return {
-            title: this.formTitle.value,
-            description: this.formDesc.value,
-            dueDate: this.formDueDate.value,
-            priority: this.formPrio.value
-        };
+        if(this.taskForm.reportValidity()) {
+            return {
+                title: this.formTitle.value,
+                description: this.formDesc.value,
+                dueDate: this.formDueDate.value,
+                priority: this.formPrio.value
+            };
+        }
     }
 
     updateUIListeners(listeners) {
