@@ -1,6 +1,16 @@
 class UIController {
     constructor() {
         this.todoContainer = document.querySelector('.todo-container');
+        
+        this.taskModal = document.querySelector('#modal-add-task');
+        this.submitTaskBtn = document.querySelector('#submit-task-btn');
+        this.openTaskModalBtn = document.querySelector('#open-task-modal');
+        this.closeTaskModalBtn = document.querySelector('#close-task-modal');
+        
+        this.formTitle = document.querySelector('#form-title');
+        this.formDesc = document.querySelector('#form-desc');
+        this.formDueDate = document.querySelector('#form-due-date');
+        this.formPrio = document.querySelector('#form-priority');
     }
 
     #addNewTaskEl(taskObj) {
@@ -73,6 +83,21 @@ class UIController {
 
 
         this.todoContainer.appendChild(newTaskEl);
+    }
+
+    getFormTask() {
+        return {
+            title: this.formTitle.value,
+            description: this.formDesc.value,
+            dueDate: this.formDueDate.value,
+            priority: this.formPrio.value
+        };
+    }
+
+    updateUIListeners(listeners) {
+        this.submitTaskBtn.addEventListener('click', listeners);
+        this.openTaskModalBtn.addEventListener('click', () => this.taskModal.showModal());
+        this.closeTaskModalBtn.addEventListener('click', () => this.taskModal.close());
     }
 
     updateTaskContainer(taskArr) {

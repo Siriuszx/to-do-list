@@ -29,9 +29,10 @@ const taskCollection = [
 ];
 
 let todoList = new TaskListController();
+todoList.updateAppListeners();
 
-todoList.addNewTask(taskCollection[0]);
-todoList.addNewTask(taskCollection[1]);
-todoList.addNewTask(taskCollection[2]);
-todoList.addNewTask(taskCollection[3]);
+// todoList.addNewTask(taskCollection[0]);
+// todoList.addNewTask(taskCollection[1]);
+// todoList.addNewTask(taskCollection[2]);
+// todoList.addNewTask(taskCollection[3]);
 
