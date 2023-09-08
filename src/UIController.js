@@ -95,12 +95,13 @@ class UIController {
                 priority: this.formPrio.value
             };
         }
-    }
+    }   
 
     updateUIListeners(listeners) {
         this.submitTaskBtn.addEventListener('click', listeners);
         this.openTaskModalBtn.addEventListener('click', () => this.taskModal.showModal());
         this.closeTaskModalBtn.addEventListener('click', () => this.taskModal.close());
+
     }
 
     updateTaskContainer(taskArr) {

@@ -9,7 +9,7 @@ class TaskListController {
 
     addNewTask(taskObj) {
         this.storage.addNewTask(this.UI.getFormData());
-        this.UI.updateTaskContainer(this.storage.getTaskLibrary());
+        this.UI.updateTaskContainer(this.storage.getTaskArr());
     }
 
     updateListeners() {
@@ -18,7 +18,7 @@ class TaskListController {
 
     logInfo(type) {
         if (type === 'all') {
-            let taskLibrary = this.storage.getTaskLibrary();
+            let taskLibrary = this.storage.getTaskArr();
 
             this.UI.logAllTasks(taskLibrary);
         } else if (Number.isInteger(type) && type > 0) {

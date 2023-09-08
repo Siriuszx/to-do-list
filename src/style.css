@@ -40,10 +40,12 @@ body {
     text-align: center;
     font-size: 1.1em;
     text-transform: uppercase;
+    cursor: pointer;
+    background-color: #c1c1c1;
 }
 
 .tab-active {
-    background-color: #b2b2b2;
+    background-color: #939393;
 }
 
 .todo-main {
