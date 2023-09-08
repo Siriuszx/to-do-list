@@ -8,7 +8,7 @@ class TaskListController {
     }
 
     addNewTask(taskObj) {
-        this.storage.addNewTask(this.UI.getFormTask());
+        this.storage.addNewTask(this.UI.getFormData());
         this.UI.updateTaskContainer(this.storage.getTaskLibrary());
     }
 

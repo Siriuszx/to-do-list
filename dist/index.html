@@ -17,18 +17,19 @@
     <nav class="todo-nav">
         <div class="nav-logo">TODO</div>
         <div>
-            <ul>
-
+            <ul class="nav-tabs">
+                <li class="tab-item tab-active">Inbox</li>
             </ul>
+        </div>
+         <div class="nav-controls">
+            <button class="action-btn" id="open-task-modal" type="button">New Task</button>
         </div>
     </nav>
     <main class="todo-main">
         <ul class="todo-container">
 
         </ul>
-        <div class="controls">
-            <button class="action-btn" id="open-task-modal" type="button">New Task</button>
-        </div>
+    
         <dialog id="modal-add-task">
             <form id="new-task-form" method="dialog">
                 <div class="form-input-field">
@@ -41,11 +42,11 @@
                 </div>
                 <div class="form-input-field">
                     <label for="form-due-date">Due Date: </label>
-                    <input required type="text" name="form-due-date" id="form-due-date" placeholder="Task Due Date">
+                    <input required type="date" name="form-due-date" id="form-due-date" placeholder="Task Due Date">
                 </div>
                 <div class="form-input-field">
                     <label for="form-priority">Priority: </label>
-                    <input required type="number" name="form-priority" id="form-priority" placeholder="Task Priority">
+                    <input required type="number" name="form-priority" id="form-priority" placeholder="Task Priority" maxlength="1" min="1" max="4">
                 </div>
                 <div class="form-input-field modal-controls">
                     <button class="action-btn" id="submit-task-btn" type="button" type="submit">Add</button>

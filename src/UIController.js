@@ -14,7 +14,7 @@ class UIController {
         this.formPrio = document.querySelector('#form-priority');
     }
 
-    #addNewTaskEl(taskObj) {
+    #addTaskEl(taskObj) {
         const newTaskEl = document.createElement('li');
         newTaskEl.classList.add('task-item');
 
@@ -86,7 +86,7 @@ class UIController {
         this.todoContainer.appendChild(newTaskEl);
     }
 
-    getFormTask() {
+    getFormData() {
         if(this.taskForm.reportValidity()) {
             return {
                 title: this.formTitle.value,
@@ -107,11 +107,14 @@ class UIController {
         this.todoContainer.innerHTML = '';
 
         taskArr.forEach((taskObj) => {
-            this.#addNewTaskEl(taskObj);
+            this.#addTaskEl(taskObj);
         });
     }
 
-    // For debugging purposes
+    //
+    // For debugging purposes*
+    //
+
     logTask(taskObj) {
         console.log(`Title: ${taskObj.title}
 Description: ${taskObj.description}

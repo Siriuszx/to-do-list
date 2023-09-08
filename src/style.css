@@ -13,6 +13,8 @@ body {
 }
 
 .todo-nav {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
     background-color: #d3d3d3;
     padding: 1.5em 2em;
 }
@@ -21,6 +23,27 @@ body {
     color: #5b5b5b;
     font-size: 3rem;
     font-weight: 700;
+}
+
+.nav-tabs {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.tab-item {
+    padding: 0.5em;
+    margin: 0;
+    text-align: center;
+    font-size: 1.1em;
+    text-transform: uppercase;
+}
+
+.tab-active {
+    background-color: #b2b2b2;
 }
 
 .todo-main {
@@ -34,7 +57,7 @@ body {
     list-style-type: decimal;
 }
 
-.todo-item {}
+.task-item {}
 
 .item-title {
     margin: 0.3em 0;
@@ -44,8 +67,12 @@ body {
 .item-info {
     list-style-type: none;
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.info-item {
+    
 }
 
 .info-title {
@@ -54,6 +81,9 @@ body {
 
 .info-data {
     text-decoration: underline;
+}
+
+.info-desc {
 }
 
 #modal-add-task {
@@ -94,9 +124,13 @@ body {
     cursor: pointer;
 }
 
-.controls {
+.nav-controls {
+    width: 100%;
+    bottom: 0;
     padding: 0.8em 2em;
-    border-top: 2px solid #d3d3d3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .controls-btn {
