@@ -119,14 +119,14 @@ class UIController {
         this.currentTaskGroup = event.currentTarget.textContent.toLowerCase();
     }
 
-    updateUIListeners(submitHandler, taskList) {
+    updateUIListeners(submitHandler, switchHandler) {
         this.submitTaskBtn.addEventListener('click', submitHandler);
         this.openTaskModalBtn.addEventListener('click', () => this.taskModal.showModal());
         this.closeTaskModalBtn.addEventListener('click', () => this.taskModal.close());
 
         this.taskGroups.forEach((taskTab) => {
             taskTab.addEventListener('click', this.#switchTaskGroup.bind(this));
-            taskTab.addEventListener('click', taskList.switchTaskGroup.bind(taskList));
+            taskTab.addEventListener('click', switchHandler);
         }); 
 
     }

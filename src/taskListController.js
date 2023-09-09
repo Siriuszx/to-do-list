@@ -17,7 +17,7 @@ class TaskListController {
     }
 
     updateListeners() {
-        this.UI.updateUIListeners(this.addNewTask.bind(this), this);
+        this.UI.updateUIListeners(this.addNewTask.bind(this), this.switchTaskGroup.bind(this));
     }
 }
 
