@@ -19,11 +19,11 @@
         <div>
             <ul class="nav-tabs">
                 <li class="tab-item tab-active">Inbox</li>
-                <li class="tab-item">Other</li>
             </ul>
         </div>
          <div class="nav-controls">
             <button class="action-btn" id="open-task-modal" type="button">New Task</button>
+            <button class="action-btn" id="open-group-modal" type="button">New Group</button>
         </div>
     </nav>
     <main class="todo-main">
@@ -50,15 +50,25 @@
                     <input required type="number" name="form-priority" id="form-priority" placeholder="Task Priority" maxlength="1" min="1" max="4">
                 </div>
                 <div class="form-input-field">
-                    <label for="">Task Group: </label>
-                    <select class="" name="task groups" id="group-select">
+                    <label for="group-select">Task Group: </label>
+                    <select class="" name="group-select" id="group-select">
                         <option value="inbox">Inbox</option>
-                        <option value="other">Other</option>
                     </select>
                 </div>
                 <div class="form-input-field modal-controls">
                     <button class="action-btn" id="submit-task-btn" type="button" type="submit">Add</button>
                     <button class="action-btn" id="close-task-modal" type="button" type="submit">Close</button>
+                </div>
+            </form>
+        </dialog>
+        <dialog id="modal-add-group">
+            <form id="new-group-form" method="dialog">
+                <label for="group-name-field">New Group Name:</label>
+                <input id="group-name-field" type="text" name="group-name-field">
+
+                <div class="form-input-field modal-controls">
+                    <button class="action-btn" id="submit-group-btn" type="button" type="submit">Add</button>
+                    <button class="action-btn" id="close-group-modal" type="button" type="submit">Close</button>
                 </div>
             </form>
         </dialog>

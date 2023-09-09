@@ -5,25 +5,36 @@ class UIController {
         // Provided to the Storage Control in order to get relevant task group
         this.currentTaskGroup = 'inbox';
 
+        this.tabsContainer = document.querySelector('.nav-tabs');
         this.currentTab = document.querySelector('.tab-active');
-        this.taskGroups = document.querySelectorAll('.tab-item');
-        
-        // Form elements
+
+        // Form elements: new group
+        this.groupModal = document.querySelector('#modal-add-group');
+        this.groupForm = document.querySelector('#new-group-form');
+        this.submitGroupBtn = document.querySelector('#submit-group-btn');
+        this.openGroupModalBtn = document.querySelector('#open-group-modal');
+        this.closeGroupModalBtn = document.querySelector('#close-group-modal');
+
+        // Add New Group: Group Data
+        this.formGroupField = document.querySelector('#group-name-field');
+
+        // Form elements: New Task
         this.taskModal = document.querySelector('#modal-add-task');
         this.taskForm = document.querySelector('#new-task-form');
         this.submitTaskBtn = document.querySelector('#submit-task-btn');
         this.openTaskModalBtn = document.querySelector('#open-task-modal');
         this.closeTaskModalBtn = document.querySelector('#close-task-modal');
-        
-        // Add New Task(From data)  
+
+        // Add New Task: From Data
         this.formTitle = document.querySelector('#form-title');
         this.formDesc = document.querySelector('#form-desc');
         this.formDueDate = document.querySelector('#form-due-date');
         this.formPrio = document.querySelector('#form-priority');
         this.formGroup = document.querySelector('#group-select');
+
     }
 
-    #addTaskEl(taskObj) {
+    #addTask(taskObj) {
         const newTaskEl = document.createElement('li');
         newTaskEl.classList.add('task-item');
 
@@ -35,7 +46,7 @@ class UIController {
         // Info container(<ul>)
         const taskInfoContainer = document.createElement('ul');
         taskInfoContainer.classList.add('item-info');
-        
+
 
         // Info Item: Description
         const infoItem1 = document.createElement('li');
@@ -95,9 +106,23 @@ class UIController {
         this.todoContainer.appendChild(newTaskEl);
     }
 
+    addGroup(event) {
+        let newGroup = document.createElement('li');
+
+        newGroup.classList.add('tab-item');
+        newGroup.classList.add('tab-active');
+        newGroup.textContent = this.formGroupField.value;
+
+        this.currentTab.classList.toggle('tab-active');
+        this.currentTab = newGroup;
+        this.currentTaskGroup = newGroup.textContent;
+
+        this.tabsContainer.appendChild(newGroup);
+    }
+
     // Returns Task Data provided in the form
     getFormTask() {
-        if(this.taskForm.reportValidity()) {
+        if (this.taskForm.reportValidity()) {
             return {
                 title: this.formTitle.value,
                 description: this.formDesc.value,
@@ -106,7 +131,7 @@ class UIController {
                 taskGroup: this.formGroup.value,
             };
         }
-    }   
+    }
 
     getCurrentTaskGroup() {
         return this.currentTaskGroup;
@@ -119,15 +144,20 @@ class UIController {
         this.currentTaskGroup = event.currentTarget.textContent.toLowerCase();
     }
 
-    updateUIListeners(submitHandler, switchHandler) {
-        this.submitTaskBtn.addEventListener('click', submitHandler);
+    updateUIListeners(submitTaskHandler, switchHandler, submitGroupHandler) {
+        this.submitTaskBtn.addEventListener('click', submitTaskHandler);
         this.openTaskModalBtn.addEventListener('click', () => this.taskModal.showModal());
         this.closeTaskModalBtn.addEventListener('click', () => this.taskModal.close());
 
-        this.taskGroups.forEach((taskTab) => {
+        this.submitGroupBtn.addEventListener('click', submitGroupHandler);
+        this.openGroupModalBtn.addEventListener('click', () => this.groupModal.showModal());
+        this.closeGroupModalBtn.addEventListener('click', () => this.groupModal.close());
+
+        let taskTabs = document.querySelectorAll('.tab-item');
+        taskTabs.forEach((taskTab) => {
             taskTab.addEventListener('click', this.#switchTaskGroup.bind(this));
             taskTab.addEventListener('click', switchHandler);
-        }); 
+        });
 
     }
 
@@ -136,7 +166,7 @@ class UIController {
         this.todoContainer.innerHTML = '';
 
         taskArr.forEach((taskObj) => {
-            this.#addTaskEl(taskObj);
+            this.#addTask(taskObj);
         });
     }
 }
