@@ -7,6 +7,7 @@ class UIController {
 
         this.tabsContainer = document.querySelector('.nav-tabs');
         this.currentTab = document.querySelector('.tab-active');
+        this.inboxTab = document.querySelector('#inbox-tab');
 
         // Form elements: new group
         this.groupModal = document.querySelector('#modal-add-group');
@@ -106,11 +107,13 @@ class UIController {
         this.todoContainer.appendChild(newTaskEl);
     }
 
-    addGroup(event) {
+    addGroup(switchHandler) {
         let newGroup = document.createElement('li');
 
         newGroup.classList.add('tab-item');
         newGroup.classList.add('tab-active');
+        newGroup.addEventListener('click', this.#switchTaskGroup.bind(this));
+        newGroup.addEventListener('click', switchHandler);
         newGroup.textContent = this.formGroupField.value;
 
         this.currentTab.classList.toggle('tab-active');
@@ -144,7 +147,7 @@ class UIController {
         this.currentTaskGroup = event.currentTarget.textContent.toLowerCase();
     }
 
-    updateUIListeners(submitTaskHandler, switchHandler, submitGroupHandler) {
+    updateUIListeners(submitTaskHandler, switchHandler, submitGroupHandler) { // TODO: Refactor listener assignment logic
         this.submitTaskBtn.addEventListener('click', submitTaskHandler);
         this.openTaskModalBtn.addEventListener('click', () => this.taskModal.showModal());
         this.closeTaskModalBtn.addEventListener('click', () => this.taskModal.close());
@@ -153,12 +156,8 @@ class UIController {
         this.openGroupModalBtn.addEventListener('click', () => this.groupModal.showModal());
         this.closeGroupModalBtn.addEventListener('click', () => this.groupModal.close());
 
-        let taskTabs = document.querySelectorAll('.tab-item');
-        taskTabs.forEach((taskTab) => {
-            taskTab.addEventListener('click', this.#switchTaskGroup.bind(this));
-            taskTab.addEventListener('click', switchHandler);
-        });
-
+        this.inboxTab.addEventListener('click', this.#switchTaskGroup.bind(this));
+        this.inboxTab.addEventListener('click', switchHandler);
     }
 
     // Wipes current container to fill it with up-to-date task list

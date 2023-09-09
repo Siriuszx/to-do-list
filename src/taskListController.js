@@ -13,15 +13,14 @@ class TaskListController {
     }
 
     addNewGroup() {
-        this.UI.addGroup();
-        this.updateListeners();
+        this.UI.addGroup(this.switchTaskGroup.bind(this));
     }
 
     switchTaskGroup() {
        this.UI.updateTaskList(this.storage.getTaskArr(this.UI.getCurrentTaskGroup())); 
     }
 
-    updateListeners() {
+    updateListeners() { // TODO: Refactor listener assignment logic
         this.UI.updateUIListeners(this.addNewTask.bind(this), this.switchTaskGroup.bind(this), this.addNewGroup.bind(this));
     }
 }
