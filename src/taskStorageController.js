@@ -14,7 +14,7 @@ class TaskStorageController {
                 taskObj.priority,
                 taskObj.taskGroup,
             );
-
+            
             this.taskLibrary.push(newTask);
         }
     }

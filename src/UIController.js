@@ -108,6 +108,7 @@ class UIController {
     }
 
     addGroup(switchHandler) {
+        let groupSelect = document.querySelector('#group-select');
         let newGroup = document.createElement('li');
 
         newGroup.classList.add('tab-item');
@@ -115,6 +116,12 @@ class UIController {
         newGroup.addEventListener('click', this.#switchTaskGroup.bind(this));
         newGroup.addEventListener('click', switchHandler);
         newGroup.textContent = this.formGroupField.value;
+
+        let newOption = document.createElement('option');
+        newOption.textContent = newGroup.textContent.charAt(0).toUpperCase() + newGroup.textContent.slice(1);;
+        newOption.value = newGroup.textContent;
+
+        groupSelect.appendChild(newOption);
 
         this.currentTab.classList.toggle('tab-active');
         this.currentTab = newGroup;
@@ -131,7 +138,7 @@ class UIController {
                 description: this.formDesc.value,
                 dueDate: this.formDueDate.value,
                 priority: this.formPrio.value,
-                taskGroup: this.formGroup.value,
+                taskGroup: this.formGroup.value.toLowerCase(),
             };
         }
     }

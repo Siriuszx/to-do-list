@@ -14,6 +14,7 @@ class TaskListController {
 
     addNewGroup() {
         this.UI.addGroup(this.switchTaskGroup.bind(this));
+        this.UI.updateTaskList(this.storage.getTaskArr(this.UI.getCurrentTaskGroup()))
     }
 
     switchTaskGroup() {
