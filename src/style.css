@@ -56,7 +56,7 @@ body {
 
 .todo-container {
     padding: 1.5em 2em;
-    list-style-type: decimal;
+    list-style-type: disc;
 }
 
 .task-item {}
@@ -69,24 +69,20 @@ body {
 .item-info {
     list-style-type: none;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 20px;
 }
 
-.info-item {
-    
-}
+.info-item {}
 
-.info-title {
+.info-title {}
+
+.info-data {
+    text-decoration: none;
     font-weight: 700;
 }
 
-.info-data {
-    text-decoration: underline;
-}
-
-.info-desc {
-}
+.info-desc {}
 
 #modal-add-task {
     border: none;
