@@ -12,8 +12,12 @@ class TaskListController {
         this.UI.updateTaskList(this.storage.getTaskArr(this.UI.getCurrentTaskGroup()));
     }
 
+    switchTaskGroup() {
+       this.UI.updateTaskList(this.storage.getTaskArr(this.UI.getCurrentTaskGroup())); 
+    }
+
     updateListeners() {
-        this.UI.updateUIListeners(this.addNewTask.bind(this));
+        this.UI.updateUIListeners(this.addNewTask.bind(this), this);
     }
 }
 

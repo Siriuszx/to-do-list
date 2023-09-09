@@ -5,6 +5,7 @@ class UIController {
         // Provided to the Storage Control in order to get relevant task group
         this.currentTaskGroup = 'inbox';
 
+        this.currentTab = document.querySelector('.tab-active');
         this.taskGroups = document.querySelectorAll('.tab-item');
         
         // Form elements
@@ -111,15 +112,22 @@ class UIController {
         return this.currentTaskGroup;
     }
 
-    // 'this' confusion
-    // switchTaskGroup() { 
-    //     this.currentTaskGroup = this.textContent.toLowerCase();
-    // }
+    #switchTaskGroup(event) {
+        this.currentTab.classList.toggle('tab-active');
+        event.currentTarget.classList.toggle('tab-active');
+        this.currentTab = event.currentTarget;
+        this.currentTaskGroup = event.currentTarget.textContent.toLowerCase();
+    }
 
-    updateUIListeners(submitListener) {
-        this.submitTaskBtn.addEventListener('click', submitListener);
+    updateUIListeners(submitHandler, taskList) {
+        this.submitTaskBtn.addEventListener('click', submitHandler);
         this.openTaskModalBtn.addEventListener('click', () => this.taskModal.showModal());
         this.closeTaskModalBtn.addEventListener('click', () => this.taskModal.close());
+
+        this.taskGroups.forEach((taskTab) => {
+            taskTab.addEventListener('click', this.#switchTaskGroup.bind(this));
+            taskTab.addEventListener('click', taskList.switchTaskGroup.bind(taskList));
+        }); 
 
     }
 
