@@ -8,23 +8,12 @@ class TaskListController {
     }
 
     addNewTask(taskObj) {
-        this.storage.addNewTask(this.UI.getFormData());
-        this.UI.updateTaskContainer(this.storage.getTaskArr());
+        this.storage.addNewTask(this.UI.getFormTask());
+        this.UI.updateTaskList(this.storage.getTaskArr(this.UI.getCurrentTaskGroup()));
     }
 
     updateListeners() {
         this.UI.updateUIListeners(this.addNewTask.bind(this));
-    }
-
-    logInfo(type) {
-        if (type === 'all') {
-            let taskLibrary = this.storage.getTaskArr();
-
-            this.UI.logAllTasks(taskLibrary);
-        } else if (Number.isInteger(type) && type > 0) {
-            this.UI.logTask(this.storage.getTaskObj(type));
-        }
-
     }
 }
 

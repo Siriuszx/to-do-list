@@ -2,8 +2,7 @@ import Task from "./task.js";
 
 class TaskStorageController {
     constructor() {
-        this.taskLibrary = {};
-        this.currentTaskGroup = 'inbox';
+        this.taskLibrary = [];
     }
 
     addNewTask(taskObj) {
@@ -13,25 +12,17 @@ class TaskStorageController {
                 taskObj.description,
                 taskObj.dueDate,
                 taskObj.priority,
+                taskObj.taskGroup,
             );
 
-            if(!this.taskLibrary[this.currentTaskGroup]) {
-                this.taskLibrary[this.currentTaskGroup] = new Array();
-            }
-            this.taskLibrary[this.currentTaskGroup].push(newTask);
+            this.taskLibrary.push(newTask);
         }
     }
 
-    removeTask(taskIndex) {
-        this.taskLibrary.splice(taskIndex, 1);
-    }
-
-    getTaskObj(index) {
-        return this.taskLibrary[index];
-    }
-
-    getTaskArr() {
-        return this.taskLibrary[this.currentTaskGroup];
+    getTaskArr(taskGroup) {
+        return this.taskLibrary.filter((taskObj) => {
+            return taskObj.taskGroup === taskGroup;
+        });
     }
 }
 

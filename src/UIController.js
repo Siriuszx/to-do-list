@@ -1,17 +1,25 @@
 class UIController {
     constructor() {
+        // UI Task Container
         this.todoContainer = document.querySelector('.todo-container');
+        // Provided to the Storage Control in order to get relevant task group
+        this.currentTaskGroup = 'inbox';
+
+        this.taskGroups = document.querySelectorAll('.tab-item');
         
+        // Form elements
         this.taskModal = document.querySelector('#modal-add-task');
         this.taskForm = document.querySelector('#new-task-form');
         this.submitTaskBtn = document.querySelector('#submit-task-btn');
         this.openTaskModalBtn = document.querySelector('#open-task-modal');
         this.closeTaskModalBtn = document.querySelector('#close-task-modal');
         
+        // Add New Task(From data)  
         this.formTitle = document.querySelector('#form-title');
         this.formDesc = document.querySelector('#form-desc');
         this.formDueDate = document.querySelector('#form-due-date');
         this.formPrio = document.querySelector('#form-priority');
+        this.formGroup = document.querySelector('#group-select');
     }
 
     #addTaskEl(taskObj) {
@@ -86,46 +94,41 @@ class UIController {
         this.todoContainer.appendChild(newTaskEl);
     }
 
-    getFormData() {
+    // Returns Task Data provided in the form
+    getFormTask() {
         if(this.taskForm.reportValidity()) {
             return {
                 title: this.formTitle.value,
                 description: this.formDesc.value,
                 dueDate: this.formDueDate.value,
-                priority: this.formPrio.value
+                priority: this.formPrio.value,
+                taskGroup: this.formGroup.value,
             };
         }
     }   
 
-    updateUIListeners(listeners) {
-        this.submitTaskBtn.addEventListener('click', listeners);
+    getCurrentTaskGroup() {
+        return this.currentTaskGroup;
+    }
+
+    // 'this' confusion
+    // switchTaskGroup() { 
+    //     this.currentTaskGroup = this.textContent.toLowerCase();
+    // }
+
+    updateUIListeners(submitListener) {
+        this.submitTaskBtn.addEventListener('click', submitListener);
         this.openTaskModalBtn.addEventListener('click', () => this.taskModal.showModal());
         this.closeTaskModalBtn.addEventListener('click', () => this.taskModal.close());
 
     }
 
-    updateTaskContainer(taskArr) {
+    // Wipes current container to fill it with up-to-date task list
+    updateTaskList(taskArr) {
         this.todoContainer.innerHTML = '';
 
         taskArr.forEach((taskObj) => {
             this.#addTaskEl(taskObj);
-        });
-    }
-
-    //
-    // For debugging purposes*
-    //
-
-    logTask(taskObj) {
-        console.log(`Title: ${taskObj.title}
-Description: ${taskObj.description}
-Due Date: ${taskObj.dueDate}
-Task Priority: ${taskObj.priority}\n`);
-    }
-
-    logAllTasks(tasksArr) {
-        tasksArr.forEach(taskObj => {
-            this.logTask(taskObj);
         });
     }
 }
