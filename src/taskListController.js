@@ -5,10 +5,12 @@ class TaskListController {
     constructor() {
         this.storage = new TaskStorageController();
         this.UI = new UIController();
+
+        this.UI.updateUIListeners(this.addNewTask.bind(this), this.switchTaskGroup.bind(this), this.addNewGroup.bind(this));
     }
 
-    addNewTask(taskObj) {
-        this.storage.addNewTask(this.UI.getFormTask());
+    addNewTask() {
+        this.storage.addNewTask(this.UI.submitFormTask());
         this.UI.updateTaskList(this.storage.getTaskArr(this.UI.getCurrentTaskGroup()));
     }
 
@@ -19,10 +21,6 @@ class TaskListController {
 
     switchTaskGroup() {
        this.UI.updateTaskList(this.storage.getTaskArr(this.UI.getCurrentTaskGroup())); 
-    }
-
-    updateListeners() { // TODO: Refactor listener assignment logic
-        this.UI.updateUIListeners(this.addNewTask.bind(this), this.switchTaskGroup.bind(this), this.addNewGroup.bind(this));
     }
 }
 

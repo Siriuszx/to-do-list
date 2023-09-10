@@ -33,29 +33,29 @@
     
         <dialog id="modal-add-task">
             <form id="new-task-form" method="dialog">
-                <div class="form-input-field">
+                <div class="form-input">
                     <label for="form-title">Title: </label>
-                    <input required type="text" name="form-title" id="form-title" placeholder="Task Name">
+                    <input required type="text" name="form-title" class="form-input-field" id="form-title" placeholder="Task Name">
                 </div>
-                <div class="form-input-field">
+                <div class="form-input">
                     <label for="form-desc">Description: </label>
-                    <input required type="text" name="form-desc" id="form-desc" placeholder="Task Description">
+                    <input required type="text" name="form-desc" class="form-input-field" id="form-desc" placeholder="Task Description">
                 </div>
-                <div class="form-input-field">
+                <div class="form-input">
                     <label for="form-due-date">Due Date: </label>
-                    <input required type="date" name="form-due-date" id="form-due-date" placeholder="Task Due Date">
+                    <input required type="date" name="form-due-date" class="form-input-field" id="form-due-date" placeholder="Task Due Date">
                 </div>
-                <div class="form-input-field">
+                <div class="form-input">
                     <label for="form-priority">Priority: </label>
-                    <input required type="number" name="form-priority" id="form-priority" placeholder="Task Priority" maxlength="1" min="1" max="4">
+                    <input required type="number" name="form-priority" class="form-input-field" id="form-priority" placeholder="Task Priority" maxlength="1" min="1" max="4">
                 </div>
-                <div class="form-input-field">
+                <div class="form-input">
                     <label for="group-select">Task Group: </label>
-                    <select class="" name="group-select" id="group-select">
+                    <select class="form-input-field" name="group-select" id="group-select">
                         <option value="inbox">Inbox</option>
                     </select>
                 </div>
-                <div class="form-input-field modal-controls">
+                <div class="form-input modal-controls">
                     <button class="action-btn" id="submit-task-btn" type="button" type="submit">Add</button>
                     <button class="action-btn" id="close-task-modal" type="button" type="submit">Close</button>
                 </div>
@@ -64,7 +64,7 @@
         <dialog id="modal-add-group">
             <form id="new-group-form" method="dialog">
                 <label for="group-name-field">New Group Name:</label>
-                <input id="group-name-field" type="text" name="group-name-field">
+                <input class="form-input-field" id="group-name-field" type="text" name="group-name-field">
 
                 <div class="form-input-field modal-controls">
                     <button class="action-btn" id="submit-group-btn" type="button" type="submit">Add</button>

@@ -33,7 +33,6 @@ const taskCollection = [
 ];
 
 let todoList = new TaskListController();
-todoList.updateListeners();
 
 // todoList.addNewTask(taskCollection[0]);
 // todoList.addNewTask(taskCollection[1]);

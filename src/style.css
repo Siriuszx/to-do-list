@@ -42,6 +42,7 @@ body {
     text-transform: uppercase;
     cursor: pointer;
     background-color: #c1c1c1;
+    user-select: none;
 }
 
 .tab-active {
@@ -95,11 +96,13 @@ body {
     gap: 1em;
 }
 
-.form-input-field {
+.form-input {
     display: flex;
     flex-direction: column;
     gap: 0.1em;
 }
+
+.form-input-field { }
 
 .modal-controls {
     display: grid;
