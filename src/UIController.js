@@ -36,10 +36,10 @@ class UIController {
 
     }
 
-    #addTaskElement(taskObj) {
+    #addTaskElement(taskObj, removeTaskHandler) {
         const newTaskEl = document.createElement('li');
         newTaskEl.classList.add('task-item');
-
+        newTaskEl.setAttribute('data-uid', taskObj.UID);
 
         const taskTitle = document.createElement('h3');
         taskTitle.classList.add('item-title');
@@ -49,6 +49,11 @@ class UIController {
         const taskInfoContainer = document.createElement('ul');
         taskInfoContainer.classList.add('item-info');
 
+        const taskRemoveBtn = document.createElement('button');
+        taskRemoveBtn.classList.add('action-btn');
+        taskRemoveBtn.classList.add('item-remove-btn');
+        taskRemoveBtn.textContent = 'Remove Task';
+        taskRemoveBtn.addEventListener('click', removeTaskHandler);
 
         // Info Item: Description
         const infoItem1 = document.createElement('li');
@@ -92,6 +97,7 @@ class UIController {
         infoPrioData.classList.add('info-data', 'info-priority');
         infoPrioData.textContent = taskObj.priority;
 
+
         infoItem3.appendChild(infoPrioTitle);
         infoItem3.appendChild(infoPrioData);
 
@@ -103,9 +109,14 @@ class UIController {
 
         newTaskEl.appendChild(taskTitle);
         newTaskEl.appendChild(taskInfoContainer);
+        newTaskEl.appendChild(taskRemoveBtn);
 
 
         this.todoContainer.appendChild(newTaskEl);
+    }
+
+    removeTask(element) {
+        element.remove();
     }
 
     addGroup(switchHandler) {
@@ -167,7 +178,7 @@ class UIController {
         this.currentTaskGroup = event.currentTarget.textContent.toLowerCase();
     }
 
-    updateUIListeners(submitTaskHandler, switchHandler, submitGroupHandler) { // TODO: Refactor listener assignment logic
+    setInitialListeners(submitTaskHandler, switchHandler, submitGroupHandler) { // TODO: Refactor listener assignment logic
         this.submitTaskBtn.addEventListener('click', submitTaskHandler);
         this.submitTaskBtn.addEventListener('click', this.#resetAllFormInput);
         this.openTaskModalBtn.addEventListener('click', () => this.taskModal.showModal());
@@ -186,11 +197,12 @@ class UIController {
     }
 
     // Wipes current container to fill it with up-to-date task list
-    updateTaskList(taskArr) {
+    updateTaskList(taskArr, removeTaskHandler) {
         this.todoContainer.innerHTML = '';
 
         taskArr.forEach((taskObj) => {
-            this.#addTaskElement(taskObj);
+            this.#addTaskElement(taskObj, removeTaskHandler);
+            console.log(taskObj.UID);
         });
     }
 }
