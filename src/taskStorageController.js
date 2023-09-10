@@ -23,10 +23,7 @@ class TaskStorageController {
     }
 
     deleteTask(UID) {
-        console.log(this.taskLibrary);
-        let taskIndex = this.taskLibrary.findIndex((element) => {
-            element.UID === UID;
-        });
+        let taskIndex = this.taskLibrary.findIndex((element) => element.UID === UID);
 
         this.taskLibrary.splice(taskIndex, 1);
     }

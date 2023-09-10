@@ -44,6 +44,14 @@ class UIController {
         const taskTitle = document.createElement('h3');
         taskTitle.classList.add('item-title');
         taskTitle.textContent = taskObj.title;
+        taskTitle.addEventListener('click', (event) => {
+            let taskInfo = event.currentTarget.parentNode.querySelector('.item-info');
+            if(taskInfo.style.display !== 'none') {
+                taskInfo.style.display = 'none';
+            } else {
+                taskInfo.style.display = 'flex';
+            }
+        })
 
         // Info container(<ul>)
         const taskInfoContainer = document.createElement('ul');
@@ -202,7 +210,6 @@ class UIController {
 
         taskArr.forEach((taskObj) => {
             this.#addTaskElement(taskObj, removeTaskHandler);
-            console.log(taskObj.UID);
         });
     }
 }
