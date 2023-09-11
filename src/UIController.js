@@ -86,7 +86,7 @@ class UIController {
 
         const infoDueDate = document.createElement('span');
         infoDueDate.classList.add('info-data', 'info-due-date');
-        infoDueDate.textContent = taskObj.dueDate;
+        infoDueDate.textContent = taskObj.timeLeft;
 
         infoItem2.appendChild(infoDueTitle);
         infoItem2.appendChild(infoDueDate);
@@ -196,7 +196,7 @@ class UIController {
     }
 
     static #getFormattedDate(dateObj = new Date()) {
-        let [year, month, day] = [dateObj.getFullYear().toString(), dateObj.getMonth().toString(), dateObj.getDay().toString()];
+        let [year, month, day] = [dateObj.getFullYear().toString(), (dateObj.getMonth() + 1).toString(), dateObj.getDate().toString()];
 
         if (month.length === 1) month = `0${month}`;
         if (day.length === 1) day = `0${day}`;
