@@ -1,9 +1,10 @@
 class UIController {
-    constructor() {
+    constructor(submitTaskHandler, switchHandler, submitGroupHandler) {
         // UI Task Container
         this.todoContainer = document.querySelector('.todo-container');
         // Provided to the Storage Control in order to get relevant task group
         this.currentTaskGroup = 'inbox';
+        this.listenersInitialized = false;
 
         this.groupSelect = document.querySelector('#group-select');
         this.tabsContainer = document.querySelector('.nav-tabs');
@@ -34,6 +35,7 @@ class UIController {
         this.formPriority = document.querySelector('#form-priority');
         this.formGroup = document.querySelector('#group-select');
 
+        this.#setInitialListeners(submitTaskHandler, switchHandler, submitGroupHandler);
     }
 
     #addTaskElement(taskObj, removeTaskHandler) {
@@ -44,7 +46,7 @@ class UIController {
         const taskTitle = document.createElement('h3');
         taskTitle.classList.add('item-title');
         taskTitle.textContent = taskObj.title;
-        taskTitle.addEventListener('click', this.taskMinimizeHandler);
+        taskTitle.addEventListener('click', this.#taskMinimizeHandler);
 
         // Info container(<ul>)
         const taskInfoContainer = document.createElement('ul');
@@ -121,7 +123,7 @@ class UIController {
         element.remove();
     }
 
-    taskMinimizeHandler(event) {
+    #taskMinimizeHandler(event) {
         let taskInfo = event.currentTarget.parentNode.querySelector('.item-info');
         
         if (taskInfo.style.display !== 'none') {
@@ -190,22 +192,27 @@ class UIController {
         this.currentTaskGroup = event.currentTarget.textContent.toLowerCase();
     }
 
-    setInitialListeners(submitTaskHandler, switchHandler, submitGroupHandler) { // TODO: Refactor listener assignment logic
-        this.submitTaskBtn.addEventListener('click', submitTaskHandler);
-        this.submitTaskBtn.addEventListener('click', this.#resetAllFormInput);
-        this.openTaskModalBtn.addEventListener('click', () => this.taskModal.showModal());
-        this.closeTaskModalBtn.addEventListener('click', () => this.taskModal.close());
-        this.closeTaskModalBtn.addEventListener('click', this.#resetAllFormInput);
-
-        this.submitGroupBtn.addEventListener('click', submitGroupHandler);
-        this.submitGroupBtn.addEventListener('click', () => this.groupModal.close());
-        this.submitGroupBtn.addEventListener('click', this.#resetAllFormInput);
-        this.openGroupModalBtn.addEventListener('click', () => this.groupModal.showModal());
-        this.closeGroupModalBtn.addEventListener('click', () => this.groupModal.close());
-        this.closeGroupModalBtn.addEventListener('click', this.#resetAllFormInput);
-
-        this.inboxTab.addEventListener('click', this.#switchTaskGroup.bind(this));
-        this.inboxTab.addEventListener('click', switchHandler);
+    #setInitialListeners(submitTaskHandler, switchHandler, submitGroupHandler) {
+        if (!this.listenersInitialized) {
+            // Add task form, modal
+            this.submitTaskBtn.addEventListener('click', submitTaskHandler);
+            this.submitTaskBtn.addEventListener('click', this.#resetAllFormInput);
+            this.openTaskModalBtn.addEventListener('click', () => this.taskModal.showModal());
+            this.closeTaskModalBtn.addEventListener('click', () => this.taskModal.close());
+            this.closeTaskModalBtn.addEventListener('click', this.#resetAllFormInput);
+    
+            // Add group form, modal
+            this.submitGroupBtn.addEventListener('click', submitGroupHandler);
+            this.submitGroupBtn.addEventListener('click', () => this.groupModal.close());
+            this.submitGroupBtn.addEventListener('click', this.#resetAllFormInput);
+            this.openGroupModalBtn.addEventListener('click', () => this.groupModal.showModal());
+            this.closeGroupModalBtn.addEventListener('click', () => this.groupModal.close());
+            this.closeGroupModalBtn.addEventListener('click', this.#resetAllFormInput);
+    
+            // Default group 'inbox'
+            this.inboxTab.addEventListener('click', this.#switchTaskGroup.bind(this));
+            this.inboxTab.addEventListener('click', switchHandler);
+        }
     }
 
     // Wipes current container to fill it with up-to-date task list
