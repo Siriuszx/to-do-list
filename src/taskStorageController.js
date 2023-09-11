@@ -1,9 +1,10 @@
 import Task from "./task.js";
 
 class TaskStorageController {
+    #taskLibrary = [];
+    #UID = 0;
+    
     constructor() {
-        this.taskLibrary = [];
-        this.UID = 0;
     }
 
     addNewTask(taskObj) {
@@ -14,25 +15,25 @@ class TaskStorageController {
                 taskObj.dueDate,
                 taskObj.priority,
                 taskObj.taskGroup,
-                this.UID
+                this.#UID
             );
 
-            this.UID++;
-            this.taskLibrary.push(newTask);
+            this.#UID++;
+            this.#taskLibrary.push(newTask);
         }
     }
 
     deleteTask(UID) {
-        let taskIndex = this.taskLibrary.findIndex((element) => element.UID === UID);
+        let taskIndex = this.#taskLibrary.findIndex((element) => element.UID === UID);
 
-        this.taskLibrary.splice(taskIndex, 1);
+        this.#taskLibrary.splice(taskIndex, 1);
     }
 
-    getTaskArr(taskGroup) {
-        if(taskGroup === 'inbox') return this.taskLibrary;
+    getTaskArr(taskGroupName) {
+        if(taskGroupName === 'inbox') return this.#taskLibrary;
         
-        return this.taskLibrary.filter((taskObj) => {
-            return taskObj.taskGroup === taskGroup;
+        return this.#taskLibrary.filter((taskObj) => {
+            return taskObj.taskGroup === taskGroupName;
         });
     }
 }
