@@ -4,15 +4,15 @@ import TaskStorageController from './taskStorageController.js';
 class TaskListController {
     constructor() {
         this.storage = new TaskStorageController();
-        this.UI = new UIController(this.addNewTask.bind(this), this.switchTaskGroup.bind(this), this.addNewGroupHandler.bind(this));
+        this.UI = new UIController(this.addNewTaskHandler.bind(this), this.switchTaskGroupHandler.bind(this), this.addNewGroupHandler.bind(this));
     }
 
-    addNewTask() {
+    addNewTaskHandler(event) {
         this.storage.addNewTask(this.UI.submitFormTask());
         this.UI.updateTaskList(this.storage.getTaskArr(this.UI.currentTaskGroup), this.removeTaskHandler.bind(this));
     }
 
-    switchTaskGroup() {
+    switchTaskGroupHandler(event) {
        this.UI.updateTaskList(this.storage.getTaskArr(this.UI.currentTaskGroup), this.removeTaskHandler.bind(this)); 
     }
 
@@ -24,7 +24,7 @@ class TaskListController {
     }
 
     addNewGroupHandler(event) {
-        this.UI.addGroup(this.switchTaskGroup.bind(this));
+        this.UI.addGroup(this.switchTaskGroupHandler.bind(this));
         this.UI.updateTaskList(this.storage.getTaskArr(this.UI.currentTaskGroup))
     }
 }

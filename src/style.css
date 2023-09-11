@@ -94,10 +94,12 @@ body {
 
 .info-desc {}
 
-#modal-add-task {
+.app-modal {
     border: none;
     box-shadow: 0 0 1em rgb(0 0 0 / 0.3);
 }
+
+#modal-add-task {}
 
 #new-task-form {
     display: flex;
@@ -105,13 +107,15 @@ body {
     gap: 1em;
 }
 
+#modal-add-group {}
+
 .form-input {
     display: flex;
     flex-direction: column;
     gap: 0.1em;
 }
 
-.form-input-field { }
+.form-input-field {}
 
 .modal-controls {
     display: grid;

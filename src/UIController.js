@@ -136,25 +136,29 @@ class UIController {
     }
 
     addGroup(switchHandler) {
-        let newGroup = document.createElement('li');
+        if (this.#groupForm.reportValidity()) {
+            let newGroup = document.createElement('li');
 
-        newGroup.classList.add('tab-item');
-        newGroup.classList.add('tab-active');
-        newGroup.addEventListener('click', this.#switchTaskGroup.bind(this));
-        newGroup.addEventListener('click', switchHandler);
-        newGroup.textContent = this.#formGroupField.value;
+            newGroup.classList.add('tab-item');
+            newGroup.classList.add('tab-active');
+            newGroup.addEventListener('click', this.#switchTaskGroup.bind(this));
+            newGroup.addEventListener('click', switchHandler);
+            newGroup.textContent = this.#formGroupField.value;
 
-        let newOption = document.createElement('option');
-        newOption.textContent = newGroup.textContent.charAt(0).toUpperCase() + newGroup.textContent.slice(1);;
-        newOption.value = newGroup.textContent;
+            let newOption = document.createElement('option');
+            newOption.textContent = newGroup.textContent.charAt(0).toUpperCase() + newGroup.textContent.slice(1);;
+            newOption.value = newGroup.textContent;
 
-        this.#groupSelect.appendChild(newOption);
+            this.#groupSelect.appendChild(newOption);
 
-        this.#currentTab.classList.toggle('tab-active');
-        this.#currentTab = newGroup;
-        this.#currentTaskGroup = newGroup.textContent;
+            this.#currentTab.classList.toggle('tab-active');
+            this.#currentTab = newGroup;
+            this.#currentTaskGroup = newGroup.textContent;
 
-        this.#tabsContainer.appendChild(newGroup);
+            this.#tabsContainer.appendChild(newGroup);
+
+            this.#groupModal.close();
+        }
     }
 
     // Returns Task Data provided in the form
@@ -184,7 +188,7 @@ class UIController {
         const formDueDate = document.querySelector('#form-due-date');
 
         formDueDate.value = UIController.#getFormattedDate();
-        
+
         formInputFields.forEach((element) => {
             if (element.getAttribute('type') === 'text' ||
                 element.getAttribute('type') === 'number') element.value = '';
@@ -218,7 +222,6 @@ class UIController {
 
             // Add group form, modal
             this.#submitGroupBtn.addEventListener('click', submitGroupHandler);
-            this.#submitGroupBtn.addEventListener('click', () => this.#groupModal.close());
             this.#submitGroupBtn.addEventListener('click', this.#resetAllFormInput);
             this.#openGroupModalBtn.addEventListener('click', () => this.#groupModal.showModal());
             this.#closeGroupModalBtn.addEventListener('click', () => this.#groupModal.close());

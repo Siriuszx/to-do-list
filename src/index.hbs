@@ -31,7 +31,7 @@
 
         </ul>
     
-        <dialog id="modal-add-task">
+        <dialog class="app-modal" id="modal-add-task">
             <form id="new-task-form" method="dialog">
                 <div class="form-input">
                     <label for="form-title">Title: </label>
@@ -61,10 +61,10 @@
                 </div>
             </form>
         </dialog>
-        <dialog id="modal-add-group">
+        <dialog class="app-modal" id="modal-add-group">
             <form id="new-group-form" method="dialog">
                 <label for="group-name-field">New Group Name:</label>
-                <input class="form-input-field" id="group-name-field" type="text" name="group-name-field">
+                <input required class="form-input-field" id="group-name-field" type="text" name="group-name-field">
 
                 <div class="form-input-field modal-controls">
                     <button class="action-btn" id="submit-group-btn" type="button" type="submit">Add</button>
