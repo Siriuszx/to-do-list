@@ -29,6 +29,8 @@ class TaskStorageController {
     }
 
     getTaskArr(taskGroup) {
+        if(taskGroup === 'inbox') return this.taskLibrary;
+        
         return this.taskLibrary.filter((taskObj) => {
             return taskObj.taskGroup === taskGroup;
         });

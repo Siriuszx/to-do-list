@@ -44,18 +44,12 @@ class UIController {
         const taskTitle = document.createElement('h3');
         taskTitle.classList.add('item-title');
         taskTitle.textContent = taskObj.title;
-        taskTitle.addEventListener('click', (event) => {
-            let taskInfo = event.currentTarget.parentNode.querySelector('.item-info');
-            if(taskInfo.style.display !== 'none') {
-                taskInfo.style.display = 'none';
-            } else {
-                taskInfo.style.display = 'flex';
-            }
-        })
+        taskTitle.addEventListener('click', this.taskMinimizeHandler);
 
         // Info container(<ul>)
         const taskInfoContainer = document.createElement('ul');
         taskInfoContainer.classList.add('item-info');
+        taskInfoContainer.style.display = 'none';
 
         const taskRemoveBtn = document.createElement('button');
         taskRemoveBtn.classList.add('action-btn');
@@ -127,6 +121,16 @@ class UIController {
         element.remove();
     }
 
+    taskMinimizeHandler(event) {
+        let taskInfo = event.currentTarget.parentNode.querySelector('.item-info');
+        
+        if (taskInfo.style.display !== 'none') {
+            taskInfo.style.display = 'none';
+        } else {
+            taskInfo.style.display = 'flex';
+        }
+    }
+
     addGroup(switchHandler) {
         let newGroup = document.createElement('li');
 
@@ -159,7 +163,7 @@ class UIController {
                 priority: this.formPriority.value,
                 taskGroup: this.formGroup.value.toLowerCase(),
             }
-            
+
             this.taskModal.close();
 
             return newTaskObj;
