@@ -1,4 +1,4 @@
-import { formatDistanceToNow, toDate } from "date-fns";
+import { formatDistanceToNow } from "date-fns";
 
 class Task {
     constructor(title, description, dueDate, priority, taskGroup, UID) {

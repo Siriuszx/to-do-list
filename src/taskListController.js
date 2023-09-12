@@ -6,7 +6,7 @@ class TaskListController {
     #UI = new UIController(this.#addNewTaskHandler.bind(this), this.#switchTaskGroupHandler.bind(this), this.#addNewGroupHandler.bind(this));
 
     constructor() {
-        
+        this.#UI.updateTaskList(this.#storage.getTaskArr(this.#UI.currentTaskGroup), this.#removeTaskHandler.bind(this));
     }
 
     #addNewTaskHandler(event) {
