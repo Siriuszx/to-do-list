@@ -87,6 +87,7 @@ class UIController {
         const infoDueDate = document.createElement('span');
         infoDueDate.classList.add('info-data', 'info-due-date');
         infoDueDate.textContent = taskObj.timeLeft;
+        console.log(taskObj);
 
         infoItem2.appendChild(infoDueTitle);
         infoItem2.appendChild(infoDueDate);

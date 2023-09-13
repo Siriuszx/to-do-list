@@ -19,7 +19,7 @@ class TaskStorageController {
                 this.#UID
             );
 
-            this.#UID++;
+            localStorage.setItem('nextUID', `${++this.#UID}`);
             this.#saveToLocalStorage(newTask);
             this.#taskLibrary.push(newTask);
         }
@@ -49,13 +49,24 @@ class TaskStorageController {
     }
 
     #loadFromLocalStorage() {
-        const keys = Object.keys(localStorage);
+        const localStorageKeys = Object.keys(localStorage);
+        const taskUIDs = localStorageKeys.filter(el => el !== 'nextUID').sort();
 
-        keys.forEach(UID => {
-            const taskDeserialized = JSON.parse(localStorage.getItem(UID));
-            this.#taskLibrary.push(taskDeserialized);
-            this.#UID++;
+        taskUIDs.forEach(UID => {
+            const taskDataDeserialized = JSON.parse(localStorage.getItem(UID));
+            const taskTemp = new Task(
+                taskDataDeserialized.title,
+                taskDataDeserialized.description,
+                taskDataDeserialized.dueDate,
+                taskDataDeserialized.priority,
+                taskDataDeserialized.taskGroup,
+                taskDataDeserialized.UID
+            );
+            
+            this.#taskLibrary.push(taskTemp);
         });
+
+        this.#UID = localStorage.getItem('nextUID') || 0;
     }
 }
 
