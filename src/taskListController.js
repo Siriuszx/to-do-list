@@ -10,10 +10,7 @@ class TaskListController {
     );
 
     constructor() {
-        this.#UI.updateUI(this.#storage.getAppData(
-            this.#UI.currentTaskGroup),
-            this.#removeTaskHandler.bind(this)
-        );
+        this.#updateUI();
     }
 
     #addNewTaskHandler(event) {

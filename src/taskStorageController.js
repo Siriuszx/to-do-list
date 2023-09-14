@@ -8,6 +8,9 @@ class TaskStorageController {
 
     constructor() {
         this.#loadFromLocalStorage();
+        console.log(`tasks --> ${this.#taskLibrary}`);
+        console.log(`groups --> ${this.#taskGroups}`);
+        console.log(`currentTaskGroup --> ${this.#currentTaskGroup}`);
     }
 
     addNewTask(taskObj) {
@@ -34,8 +37,10 @@ class TaskStorageController {
     }
 
     addTaskGroup(groupName) {
-        if (groupName && !this.#taskGroups.some((taskName) => taskName === groupName))
+        if (groupName && !this.#taskGroups.some((taskName) => taskName === groupName)) {
             this.#taskGroups.push(groupName);
+        }
+        localStorage.setItem('groupNames', JSON.stringify(this.#taskGroups));
     }
 
     getAppData() {
@@ -61,6 +66,7 @@ class TaskStorageController {
 
     switchCurrentTaskGroup(taskGroupName) {
         this.#currentTaskGroup = taskGroupName;
+        localStorage.setItem('currentTaskGroup', this.#currentTaskGroup);
     }
 
     #saveToLocalStorage(taskObj) {
@@ -74,7 +80,7 @@ class TaskStorageController {
 
     #loadFromLocalStorage() {
         const localStorageKeys = Object.keys(localStorage);
-        const taskUIDs = localStorageKeys.filter(el => el !== 'nextUID').sort();
+        const taskUIDs = localStorageKeys.filter(el => Boolean(Number.parseInt(el)) || el == 0).sort();
 
         taskUIDs.forEach(UID => {
             const taskDataDeserialized = JSON.parse(localStorage.getItem(UID));
@@ -90,7 +96,9 @@ class TaskStorageController {
             this.#taskLibrary.push(taskTemp);
         });
 
+        this.#taskGroups = JSON.parse(localStorage.getItem('groupNames')) || ['inbox'];
         this.#UID = localStorage.getItem('nextUID') || 0;
+        this.#currentTaskGroup = localStorage.getItem('currentTaskGroup') || 'inbox';
     }
 }
 

@@ -146,7 +146,8 @@ class UIController {
 
         if (groupName === currentTaskGroup) {
             newGroup.classList.add('tab-active');
-            this.#currentTaskGroup = newGroup.textContent;
+            this.#currentTaskGroup = groupName;
+            this.#currentTab = newGroup;
         }
 
         this.#tabsContainer.appendChild(newGroup);
@@ -174,7 +175,7 @@ class UIController {
     submitFormGroup() {
         if (this.#groupForm.reportValidity()) {
             this.#groupModal.close();
-            return this.#formGroupField.value;
+            return this.#formGroupField.value.toLowerCase();
         }
 
         return null;
@@ -206,9 +207,6 @@ class UIController {
     }
 
     #switchTaskGroup(event) {
-        this.#currentTab.classList.toggle('tab-active');
-        event.currentTarget.classList.toggle('tab-active');
-        this.#currentTab = event.currentTarget;
         this.#currentTaskGroup = event.currentTarget.textContent.toLowerCase();
     }
 
@@ -247,6 +245,8 @@ class UIController {
         this.#todoContainer.innerHTML = '';
         this.#navGroupsContainer.innerHTML = '';
         this.#groupSelect.innerHTML = '';
+
+        this.#currentTaskGroup = appData.currentTaskGroup;
 
         appData.taskData.forEach((taskObj) => {
             this.#addTaskElement(taskObj, removeTaskHandler);
