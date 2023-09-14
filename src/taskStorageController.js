@@ -2,6 +2,8 @@ import Task from "./task.js";
 
 class TaskStorageController {
     #taskLibrary = [];
+    #taskGroups = ['inbox'];
+    #currentTaskGroup = 'inbox';
     #UID = 0;
 
     constructor() {
@@ -31,12 +33,34 @@ class TaskStorageController {
         this.#taskLibrary.splice(taskIndex, 1);
     }
 
-    getTaskArr(taskGroupName) {
-        if (taskGroupName === 'inbox') return this.#taskLibrary;
+    addTaskGroup(groupName) {
+        if (groupName && !this.#taskGroups.some((taskName) => taskName === groupName))
+            this.#taskGroups.push(groupName);
+    }
 
-        return this.#taskLibrary.filter((taskObj) => {
-            return taskObj.taskGroup === taskGroupName;
-        });
+    getAppData() {
+        let appTaskData = {
+            taskData: [],
+            groupData: [],
+            currentTaskGroup: '',
+        };
+
+        if (this.#currentTaskGroup === 'inbox') {
+            appTaskData.taskData = this.#taskLibrary;
+        } else {
+            appTaskData.taskData = this.#taskLibrary.filter((taskObj) => {
+                return taskObj.taskGroup === this.#currentTaskGroup;
+            });
+        }
+
+        appTaskData.groupData = this.#taskGroups;
+        appTaskData.currentTaskGroup = this.#currentTaskGroup;
+
+        return appTaskData;
+    }
+
+    switchCurrentTaskGroup(taskGroupName) {
+        this.#currentTaskGroup = taskGroupName;
     }
 
     #saveToLocalStorage(taskObj) {
@@ -62,7 +86,7 @@ class TaskStorageController {
                 taskDataDeserialized.taskGroup,
                 taskDataDeserialized.UID
             );
-            
+
             this.#taskLibrary.push(taskTemp);
         });
 

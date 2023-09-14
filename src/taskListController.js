@@ -3,19 +3,27 @@ import TaskStorageController from './taskStorageController.js';
 
 class TaskListController {
     #storage = new TaskStorageController();
-    #UI = new UIController(this.#addNewTaskHandler.bind(this), this.#switchTaskGroupHandler.bind(this), this.#addNewGroupHandler.bind(this));
+    #UI = new UIController(
+        this.#addNewTaskHandler.bind(this),
+        this.#switchTaskGroupHandler.bind(this),
+        this.#addNewGroupHandler.bind(this)
+    );
 
     constructor() {
-        this.#UI.updateTaskList(this.#storage.getTaskArr(this.#UI.currentTaskGroup), this.#removeTaskHandler.bind(this));
+        this.#UI.updateUI(this.#storage.getAppData(
+            this.#UI.currentTaskGroup),
+            this.#removeTaskHandler.bind(this)
+        );
     }
 
     #addNewTaskHandler(event) {
         this.#storage.addNewTask(this.#UI.submitFormTask());
-        this.#UI.updateTaskList(this.#storage.getTaskArr(this.#UI.currentTaskGroup), this.#removeTaskHandler.bind(this));
+        this.#updateUI();
     }
 
     #switchTaskGroupHandler(event) {
-        this.#UI.updateTaskList(this.#storage.getTaskArr(this.#UI.currentTaskGroup), this.#removeTaskHandler.bind(this));
+        this.#storage.switchCurrentTaskGroup(this.#UI.currentTaskGroup);
+        this.#updateUI();
     }
 
     #removeTaskHandler(event) {
@@ -26,8 +34,16 @@ class TaskListController {
     }
 
     #addNewGroupHandler(event) {
-        this.#UI.addGroup(this.#switchTaskGroupHandler.bind(this));
-        this.#UI.updateTaskList(this.#storage.getTaskArr(this.#UI.currentTaskGroup))
+        this.#storage.addTaskGroup(this.#UI.submitFormGroup());
+        this.#updateUI();
+    }
+
+    #updateUI() {
+        this.#UI.updateUI(
+            this.#storage.getAppData(),
+            this.#removeTaskHandler.bind(this),
+            this.#switchTaskGroupHandler.bind(this)
+        );
     }
 }
 

@@ -2,6 +2,7 @@ class UIController {
 
     // UI Task Container
     #todoContainer = document.querySelector('.todo-container');
+    #navGroupsContainer = document.querySelector('.nav-tabs');
     // Provided to the Storage Control in order to get relevant task group
     #currentTaskGroup = 'inbox';
     #listenersInitialized = false;
@@ -87,7 +88,6 @@ class UIController {
         const infoDueDate = document.createElement('span');
         infoDueDate.classList.add('info-data', 'info-due-date');
         infoDueDate.textContent = taskObj.timeLeft;
-        console.log(taskObj);
 
         infoItem2.appendChild(infoDueTitle);
         infoItem2.appendChild(infoDueDate);
@@ -136,30 +136,20 @@ class UIController {
         }
     }
 
-    addGroup(switchHandler) {
-        if (this.#groupForm.reportValidity()) {
-            let newGroup = document.createElement('li');
+    addGroupElement(groupName, switchHandler, currentTaskGroup) {
+        let newGroup = document.createElement('li');
 
-            newGroup.classList.add('tab-item');
+        newGroup.classList.add('tab-item');
+        newGroup.addEventListener('click', this.#switchTaskGroup.bind(this));
+        newGroup.addEventListener('click', switchHandler);
+        newGroup.textContent = groupName;
+
+        if (groupName === currentTaskGroup) {
             newGroup.classList.add('tab-active');
-            newGroup.addEventListener('click', this.#switchTaskGroup.bind(this));
-            newGroup.addEventListener('click', switchHandler);
-            newGroup.textContent = this.#formGroupField.value;
-
-            let newOption = document.createElement('option');
-            newOption.textContent = newGroup.textContent.charAt(0).toUpperCase() + newGroup.textContent.slice(1);;
-            newOption.value = newGroup.textContent;
-
-            this.#groupSelect.appendChild(newOption);
-
-            this.#currentTab.classList.toggle('tab-active');
-            this.#currentTab = newGroup;
             this.#currentTaskGroup = newGroup.textContent;
-
-            this.#tabsContainer.appendChild(newGroup);
-
-            this.#groupModal.close();
         }
+
+        this.#tabsContainer.appendChild(newGroup);
     }
 
     // Returns Task Data provided in the form
@@ -170,9 +160,10 @@ class UIController {
                 description: this.#formDescription.value,
                 dueDate: this.#formDueDate.value,
                 priority: this.#formPriority.value,
-                taskGroup: this.#formGroup.value.toLowerCase(),
+                taskGroup: this.#groupSelect.value.toLowerCase(),
             }
 
+            console.log(this.#groupSelect.value);
             this.#taskModal.close();
 
             return newTaskObj;
@@ -180,8 +171,13 @@ class UIController {
         return null;
     }
 
-    get currentTaskGroup() {
-        return this.#currentTaskGroup;
+    submitFormGroup() {
+        if (this.#groupForm.reportValidity()) {
+            this.#groupModal.close();
+            return this.#formGroupField.value;
+        }
+
+        return null;
     }
 
     #resetAllFormInput() {
@@ -203,6 +199,10 @@ class UIController {
         if (day.length === 1) day = `0${day}`;
 
         return `${year}-${month}-${day}`;
+    }
+
+    get currentTaskGroup() {
+        return this.#currentTaskGroup;
     }
 
     #switchTaskGroup(event) {
@@ -234,13 +234,32 @@ class UIController {
         }
     }
 
-    // Wipes current container to fill it with up-to-date task list
-    updateTaskList(taskArr, removeTaskHandler) {
-        this.#todoContainer.innerHTML = '';
+    #addNewOption(optionName) {
+        let newOption = document.createElement('option');
+        newOption.textContent = optionName.charAt(0).toUpperCase() + optionName.slice(1);;
+        newOption.value = optionName;
 
-        taskArr.forEach((taskObj) => {
+        this.#groupSelect.appendChild(newOption);
+    }
+
+    // Wipes current container to fill it with up-to-date task list
+    updateUI(appData, removeTaskHandler, switchGroupHandler) {
+        this.#todoContainer.innerHTML = '';
+        this.#navGroupsContainer.innerHTML = '';
+        this.#groupSelect.innerHTML = '';
+
+        appData.taskData.forEach((taskObj) => {
             this.#addTaskElement(taskObj, removeTaskHandler);
         });
+
+        appData.groupData.forEach((groupName) => {
+            this.addGroupElement(groupName, switchGroupHandler, appData.currentTaskGroup);
+        });
+
+        appData.groupData.forEach((optionName) => {
+            this.#addNewOption(optionName);
+        });
+        
     }
 }
 
