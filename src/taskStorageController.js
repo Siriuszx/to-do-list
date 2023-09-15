@@ -87,7 +87,7 @@ class TaskStorageController {
     #loadFromLocalStorage() {
         const localStorageKeys = Object.keys(localStorage);
         const taskUIDs = localStorageKeys
-            .filter((el) => Boolean(parseInt(el, 10)) || el === 0)
+            .filter((el) => Boolean(parseInt(el, 10)) || parseInt(el, 10) === 0)
             .sort();
 
         taskUIDs.forEach((UID) => {
