@@ -83,16 +83,19 @@ body {
     max-width: 15ch;
 }
 
-.info-item {}
+.info-item {
+}
 
-.info-title {}
+.info-title {
+}
 
 .info-data {
     text-decoration: none;
     font-weight: 700;
 }
 
-.info-desc {}
+.info-desc {
+}
 
 .app-modal {
     border: none;
@@ -100,7 +103,8 @@ body {
     box-shadow: 0 0 1em rgb(0 0 0 / 0.3);
 }
 
-#modal-add-task {}
+#modal-add-task {
+}
 
 #new-task-form {
     display: flex;
@@ -108,7 +112,8 @@ body {
     gap: 1em;
 }
 
-#modal-add-group {}
+#modal-add-group {
+}
 
 .form-input {
     display: flex;
@@ -116,7 +121,8 @@ body {
     gap: 0.1em;
 }
 
-.form-input-field {}
+.form-input-field {
+}
 
 .modal-controls {
     display: grid;

@@ -1,78 +1,147 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Handjet:wght@300;400;700&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap"
-        rel="stylesheet">
-    <title>To-Do List</title>
-</head>
+    <head>
+        <meta charset='UTF-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <link rel='stylesheet' href='style.css' />
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+        <link
+            href='https://fonts.googleapis.com/css2?family=Handjet:wght@300;400;700&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap'
+            rel='stylesheet'
+        />
+        <title>To-Do List</title>
+    </head>
 
-<body>
-    <nav class="todo-nav">
-        <div class="nav-logo">TODO</div>
-        <div>
-            <ul class="nav-tabs">
-                <li id="inbox-tab" class="tab-item tab-active">inbox</li>
+    <body>
+        <nav class='todo-nav'>
+            <div class='nav-logo'>TODO</div>
+            <div>
+                <ul class='nav-tabs'>
+                    <li id='inbox-tab' class='tab-item tab-active'>inbox</li>
+                </ul>
+            </div>
+            <div class='nav-controls'>
+                <button
+                    class='action-btn'
+                    id='open-task-modal'
+                    type='button'
+                >New Task</button>
+                <button
+                    class='action-btn'
+                    id='open-group-modal'
+                    type='button'
+                >New Group</button>
+            </div>
+        </nav>
+        <main class='todo-main'>
+            <ul class='todo-container'>
+
             </ul>
-        </div>
-         <div class="nav-controls">
-            <button class="action-btn" id="open-task-modal" type="button">New Task</button>
-            <button class="action-btn" id="open-group-modal" type="button">New Group</button>
-        </div>
-    </nav>
-    <main class="todo-main">
-        <ul class="todo-container">
 
-        </ul>
-    
-        <dialog class="app-modal" id="modal-add-task">
-            <form id="new-task-form" method="dialog">
-                <div class="form-input">
-                    <label for="form-title">Title: </label>
-                    <input required type="text" name="form-title" class="form-input-field" id="form-title" placeholder="Task Name">
-                </div>
-                <div class="form-input">
-                    <label for="form-desc">Description: </label>
-                    <input required type="text" name="form-desc" class="form-input-field" id="form-desc" placeholder="Task Description">
-                </div>
-                <div class="form-input">
-                    <label for="form-due-date">Due Date: </label>
-                    <input required type="date" name="form-due-date" class="form-input-field" id="form-due-date" placeholder="Task Due Date">
-                </div>
-                <div class="form-input">
-                    <label for="form-priority">Priority: </label>
-                    <input required type="number" name="form-priority" class="form-input-field" id="form-priority" placeholder="Task Priority" maxlength="1" min="1" max="4">
-                </div>
-                <div class="form-input">
-                    <label for="group-select">Task Group: </label>
-                    <select class="form-input-field" name="group-select" id="group-select">
-                        <option value="inbox">Inbox</option>
-                    </select>
-                </div>
-                <div class="form-input modal-controls">
-                    <button class="action-btn" id="submit-task-btn" type="button" type="submit">Add</button>
-                    <button class="action-btn" id="close-task-modal" type="button" type="submit">Close</button>
-                </div>
-            </form>
-        </dialog>
-        <dialog class="app-modal" id="modal-add-group">
-            <form id="new-group-form" method="dialog">
-                <label for="group-name-field">New Group Name:</label>
-                <input required class="form-input-field" id="group-name-field" type="text" name="group-name-field">
+            <dialog class='app-modal' id='modal-add-task'>
+                <form id='new-task-form' method='dialog'>
+                    <div class='form-input'>
+                        <label for='form-title'>Title: </label>
+                        <input
+                            required
+                            type='text'
+                            name='form-title'
+                            class='form-input-field'
+                            id='form-title'
+                            placeholder='Task Name'
+                        />
+                    </div>
+                    <div class='form-input'>
+                        <label for='form-desc'>Description: </label>
+                        <input
+                            required
+                            type='text'
+                            name='form-desc'
+                            class='form-input-field'
+                            id='form-desc'
+                            placeholder='Task Description'
+                        />
+                    </div>
+                    <div class='form-input'>
+                        <label for='form-due-date'>Due Date: </label>
+                        <input
+                            required
+                            type='date'
+                            name='form-due-date'
+                            class='form-input-field'
+                            id='form-due-date'
+                            placeholder='Task Due Date'
+                        />
+                    </div>
+                    <div class='form-input'>
+                        <label for='form-priority'>Priority: </label>
+                        <input
+                            required
+                            type='number'
+                            name='form-priority'
+                            class='form-input-field'
+                            id='form-priority'
+                            placeholder='Task Priority'
+                            maxlength='1'
+                            min='1'
+                            max='4'
+                        />
+                    </div>
+                    <div class='form-input'>
+                        <label for='group-select'>Task Group: </label>
+                        <select
+                            class='form-input-field'
+                            name='group-select'
+                            id='group-select'
+                        >
+                            <option value='inbox'>Inbox</option>
+                        </select>
+                    </div>
+                    <div class='form-input modal-controls'>
+                        <button
+                            class='action-btn'
+                            id='submit-task-btn'
+                            type='button'
+                            type='submit'
+                        >Add</button>
+                        <button
+                            class='action-btn'
+                            id='close-task-modal'
+                            type='button'
+                            type='submit'
+                        >Close</button>
+                    </div>
+                </form>
+            </dialog>
+            <dialog class='app-modal' id='modal-add-group'>
+                <form id='new-group-form' method='dialog'>
+                    <label for='group-name-field'>New Group Name:</label>
+                    <input
+                        required
+                        class='form-input-field'
+                        id='group-name-field'
+                        type='text'
+                        name='group-name-field'
+                    />
 
-                <div class="form-input-field modal-controls">
-                    <button class="action-btn" id="submit-group-btn" type="button" type="submit">Add</button>
-                    <button class="action-btn" id="close-group-modal" type="button" type="submit">Close</button>
-                </div>
-            </form>
-        </dialog>
-    </main>
-</body>
+                    <div class='form-input-field modal-controls'>
+                        <button
+                            class='action-btn'
+                            id='submit-group-btn'
+                            type='button'
+                            type='submit'
+                        >Add</button>
+                        <button
+                            class='action-btn'
+                            id='close-group-modal'
+                            type='button'
+                            type='submit'
+                        >Close</button>
+                    </div>
+                </form>
+            </dialog>
+        </main>
+    </body>
 
 </html>

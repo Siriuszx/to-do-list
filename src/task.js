@@ -1,4 +1,4 @@
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow } from 'date-fns';
 
 class Task {
     constructor(title, description, dueDate, priority, taskGroup, UID) {
@@ -12,7 +12,7 @@ class Task {
 
     get timeLeft() {
         let [year, month, day] = this.dueDate.split('-');
-    
+
         return `in ${formatDistanceToNow(new Date(year, month - 1, day))}`;
     }
 }

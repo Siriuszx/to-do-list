@@ -5,13 +5,13 @@ module.exports = {
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
-        static: './dist'
+        static: './dist',
     },
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Development',
             template: './src/index.hbs',
-        })
+        }),
     ],
     entry: './src/index.js',
     output: {
@@ -27,8 +27,8 @@ module.exports = {
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: 'asset/resource'
-            }
+                type: 'asset/resource',
+            },
         ],
-    }
-}
+    },
+};
